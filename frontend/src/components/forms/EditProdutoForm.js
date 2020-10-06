@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const EditProdutoForm = props =>{
     const[produto, setProduto] = useState(props.currentProduto);
@@ -8,7 +9,8 @@ const EditProdutoForm = props =>{
     };
     const submitForm = event =>{
         event.preventDefault();
-        props.upsateProduto(produto.id, produto);
+        props.updateProduto(produto.id, produto);
+        props.handleShowMessege(true);
 
     }
     useEffect(() =>{
@@ -22,9 +24,10 @@ const EditProdutoForm = props =>{
                 <div className='form-group'>
                     <label htmlFor='item'>Item</label>
                     <input
-                    type='text'
-                    name= 'item'
+                    id={produto.id}
                     value={produto.item}
+                    type='text'
+                    name= "item"                   
                     onChange={handleInputChange}
                     required
                     className='form-control'
@@ -56,11 +59,10 @@ const EditProdutoForm = props =>{
 
                 </div>
                 <div className='form-group'>
-                    <button
-                    className='btn btn-primary'
+                    <Button
                     onClick={() => props.setEditing(false)}
-                    value='Cancelar'
-                    />
+                    variant='primary'
+                    >Cancelar</Button>                    
                 </div>
 
             </form>

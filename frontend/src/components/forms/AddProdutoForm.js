@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const AddProdutoForm = props =>{
     const initFormState= {item:'', quantidade:'', valor:'' };
@@ -14,6 +15,7 @@ const AddProdutoForm = props =>{
         event.preventDefault();
         if (!produto.item || !produto.quantidade || !produto.valor) return;
         props.addProduto(produto);
+        props.handleButtonAdd();
         alert(JSON.stringify(produto));
         setProduto(initFormState);
     }
@@ -21,6 +23,7 @@ const AddProdutoForm = props =>{
 
     return(
         <div className='container'>
+            <h5 className='list-group-item-primary'>Adicionar Produto</h5>
             <form 
             onSubmit={submitForm}>
                 <div className='form-group' id='item'>
@@ -42,8 +45,9 @@ const AddProdutoForm = props =>{
                     type='number'
                     className='form-control' 
                     onChange={handleInputChange}
+                    value={produto.quantidade || ''}
                     name='quantidade'
-                    value={produto.item || ''}
+                    
                     required
                     />
 
@@ -61,11 +65,10 @@ const AddProdutoForm = props =>{
 
                 </div>
                 <div className='form-group'>
-                    <button
-                    type='submit'
-                    className='btn btn-primary'
-                    value='Submit'
-                    />
+                    <Button
+                        variant='primary'
+                        type='submit'
+                    >Enviar </Button>                    
                 </div>
 
             </form>
