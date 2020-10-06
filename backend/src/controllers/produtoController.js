@@ -21,7 +21,7 @@ class ProdutoController {
             message:error.message
         }));
   
-      //return res.json(user);
+      //return res.json(produto);
     }
   
     async index(req, res){
@@ -86,7 +86,7 @@ class ProdutoController {
     }
     async destroy(req, res){
         const produto_id=req.params.id;
-        User.destroy({
+        Produto.destroy({
             where:{
                 id:produto_id
             }
