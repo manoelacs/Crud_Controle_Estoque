@@ -1,5 +1,4 @@
-import userEvent from '@testing-library/user-event';
-import React, { useState } from 'react';
+import React from 'react';
 import api from '../api';
 import EditProdutoForm from '../components/forms/EditProdutoForm';
 import ProdutoTable from '../components/table/ProdutoTable'
@@ -57,7 +56,7 @@ class Home extends React.Component{
     }
 
     addProduto = produto => {
-        const response = api.post('/create', produto)
+       api.post('/create', produto)
         .then( res => { 
             this.setState({
                 showMessege:true
@@ -70,7 +69,7 @@ class Home extends React.Component{
         });
     }
     updateProduto = (id, produto) =>{
-        const response = api.put(`/update${id}`, produto)
+        api.put(`/update/${id}`, produto)
         .then(res => {
             console.log('Produto atualizado');
             this.handleChangeTable();
@@ -89,15 +88,13 @@ class Home extends React.Component{
         });
     }
     editRow = produto => {
-        this.setState({
-            correntProduto:{
-                id:produto.id,
-                item:produto.item,
-                quantidade:produto.quantidade,
-                valor:produto.valor
-            }      
-           });
+      
         this.setEditing(true);
+        
+        this.setState({currentProduto:{id:produto.id,  item:produto.item,
+             quantidade:produto.quantidade, valor:produto.valor}});
+        console.log(this.currentProduto);
+        
     }
     setEditing = isEditing =>{
         this.setState({
@@ -119,8 +116,9 @@ class Home extends React.Component{
 
 
     render(){
-        const {produtos} = this.state.produtos;
-        const buttonAdd = this.state.buttonAdd;
+        const produtos = this.state.produtos;
+        const buttonAdd = this.state.buttonAdd;        
+
         return(
             <div>
                 
@@ -134,6 +132,7 @@ class Home extends React.Component{
                                     currentProduto = {this.state.currentProduto}
                                     updateProduto = {this.updateProduto}
                                     showMessege = {this.state.showMessege}
+                                    handleShowMessege = {this.handleShowMessege}
                                     setEditing = {this.setEditing}
 
                                 />
@@ -173,7 +172,7 @@ class Home extends React.Component{
                 <div className='container'>
                     <h5 className='list-group-item list-group list-group-item-primary'>Lista de Produtos cadastrados</h5>
                     <ProdutoTable 
-                         produtos = {this.state.produtos}
+                         produtos = {produtos}
                          editRow = {this.editRow}
                          deleteProduto = {this.deleteProduto}/>              
                 </div>

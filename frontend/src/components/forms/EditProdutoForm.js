@@ -3,14 +3,18 @@ import { Button } from 'react-bootstrap';
 
 const EditProdutoForm = props =>{
     const[produto, setProduto] = useState(props.currentProduto);
+    console.log(props.currentProduto);
+
     const handleInputChange = event =>{
         const {name, value} = event.target;
         setProduto({...produto, [name]:value});
+       
     };
     const submitForm = event =>{
         event.preventDefault();
         props.updateProduto(produto.id, produto);
         props.handleShowMessege(true);
+        props.setEditing(false);
 
     }
     useEffect(() =>{
@@ -60,8 +64,13 @@ const EditProdutoForm = props =>{
                 </div>
                 <div className='form-group'>
                     <Button
+                    type='submit'
+                    variant='primary'>
+                        Salvar
+                    </Button>
+                    <Button
                     onClick={() => props.setEditing(false)}
-                    variant='primary'
+                    variant='danger'
                     >Cancelar</Button>                    
                 </div>
 

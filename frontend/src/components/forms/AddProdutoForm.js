@@ -68,7 +68,7 @@ const AddProdutoForm = props =>{
                     <Button
                         variant='primary'
                         type='submit'
-                    >Enviar </Button>                    
+                    >Adicionar </Button>                    
                 </div>
 
             </form>
