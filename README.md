@@ -14,7 +14,7 @@ Sistema de gerenciamento de estoque de produtos, utilizando ReactJS e Node (Expr
 - [x] Editar produto
 - [x] Deletar produto
                
-}
+
 ## Pacotes utilizados no frontend:
 <table>
     <thead>
